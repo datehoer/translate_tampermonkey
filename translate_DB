@@ -1,0 +1,96 @@
+// ==UserScript==
+// @name         Translate_DB
+// @namespace    https://zjzdmc.to
+// @version      0.1
+// @description  一个非常呆的翻译插件,点击百度翻译图标,输入内容,选择语言,翻译/需要开启跨域请求,请点击始终允许.
+// @author       Datehoer
+// @match        *://*/*
+// @icon         https://zjzdmc.top/img/translate.png
+// @grant        GM_xmlhttpRequest
+// @grant        GM_download
+// @require      https://zjzdmc.top/jquery1.10.2.min.js
+// ==/UserScript==
+
+(function() {
+    const body = document.querySelector('body');
+    console.log("hello world");
+    let translate_body = document.createElement("div");
+    translate_body.className = "translate_body"
+    translate_body.style.backgroundImage = "url(https://zjzdmc.top/img/translate.png)";
+    translate_body.style.backgroundRepeat = "no-repeat";
+    translate_body.style.backgroundSize = "100%";
+    translate_body.style.position = "fixed";
+    translate_body.style.top = "50px";
+    translate_body.style.right = "50px";
+    translate_body.style.width = "35px";
+    translate_body.style.height = "35px";
+    translate_body.style.overflow = "hidden";
+    translate_body.style.zIndex = '9999';
+    translate_body.style.cursor = "pointer";
+    translate_body.title = "点击翻译"
+    let translate_box = document.createElement("div");
+    translate_box.className = "translate_box"
+    translate_box.style.position = "fixed";
+    translate_box.style.zIndex = '99999';
+    translate_box.style.top = "100px";
+    translate_box.style.right = "100px";
+    translate_box.style.display= 'flex';
+    translate_box.style.width= '400px';
+    translate_box.style.flexDirection= 'row';
+    translate_box.style.flexWrap='wrap';
+    translate_box.style.justifyContent= 'space-between';
+    let translate_box_input = document.createElement("input");
+    let translate_box_change = document.createElement("input");
+    let translate_box_show = document.createElement("input");
+    let translate_box_input_language = document.createElement("input");
+    let translate_box_show_language = document.createElement("input");
+    translate_box_input.type = "text"
+    translate_box_change.type = "button"
+    translate_box_show.type = "text"
+    translate_box_input_language.type = "text"
+    translate_box_input_language.value = "auto"
+    translate_box_show_language.type = "text"
+    translate_box_show_language.value = "zh-CN"
+    translate_box_change.value = "翻译"
+    translate_box.appendChild(translate_box_input);
+    translate_box.appendChild(translate_box_change);
+    translate_box.appendChild(translate_box_show);
+    translate_box.appendChild(translate_box_input_language);
+    translate_box.appendChild(translate_box_show_language);
+    body.appendChild(translate_box);
+    body.appendChild(translate_body);
+    let image_test = new Image();
+    image_test.src = 'https://zjzdmc.top/img/translate.png';
+    setTimeout(()=>{
+        if(image_test.width == 0){
+            translate_body.style.backgroundImage = "url(https://raw.githubusercontent.com/datehoer/translate_tampermonkey/main/translate.png)";
+        }
+    },1000)
+    $('.translate_box').hide()
+    document.body.addEventListener('mousedown',()=>{
+        document.body.addEventListener('mouseup',()=>{
+            if(window.getSelection().toString().length > 0){
+                translate_box_input.value = window.getSelection().toString();
+            }
+        })
+    })
+    translate_body.addEventListener("click",()=>{
+        $('.translate_box').toggle();
+    })
+    translate_box_change.addEventListener("click",()=>{
+        let input_value = translate_box_input.value;
+        let input_language = translate_box_input_language.value;
+        let show_language = translate_box_show_language.value;
+        let link = "https://translate.google.cn/m?sl="+input_language+"&tl="+show_language+"&hl=en&q="+input_value;
+        GM_xmlhttpRequest({
+            method: "GET",
+            url: link,
+            onload: (res)=>{
+                let v = res.responseText;
+                let pattern = /<div class="result-container">(.*?)<\/div>/;
+                console.log(v.match(pattern)[1])
+                translate_box_show.value = v.match(pattern)[1];
+            }
+        })
+        })
+})();
