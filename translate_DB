@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Translate_DB
-// @namespace    https://zjzdmc.to
+// @namespace    https://zjzdmc.top
 // @version      0.1
 // @description  一个非常呆的翻译插件,点击百度翻译图标,输入内容,选择语言,翻译/需要开启跨域请求,请点击始终允许.
 // @author       Datehoer
