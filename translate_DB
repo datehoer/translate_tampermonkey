@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Translate_DB
 // @namespace    https://zjzdmc.top
-// @version      0.6
+// @version      0.6.1
 // @description  一个非常呆的翻译插件,点击百度翻译图标,输入内容,选择语言,翻译/需要开启跨域请求,请点击始终允许.
 // @author       Datehoer
 // @match        *://*/*
@@ -16,7 +16,7 @@
     console.log("hello world");
     let translate_body = document.createElement("div");
     translate_body.className = "translate_body";
-    translate_body.setAttribute("style","background-image:url(https://zjzdmc.top/img/translate.png);background-repeat:no-repeat;background-size:100%;position:fixed;top:50px;right:50px;width:35px;height:35px;overflow:hidden;z-index:9999;cursor:pointer;");
+    translate_body.setAttribute("style","background-image:url('https://zjzdmc.top/img/translate.png');background-repeat:no-repeat;background-size:100%;position:fixed;top:50px;right:50px;width:35px;height:35px;overflow:hidden;z-index:9999;cursor:pointer;");
     translate_body.title = "点击翻译";
     let translate_box = document.createElement("div");
     translate_box.className = "translate_box";
@@ -37,7 +37,7 @@
     translate_box_show_language.type = "text";
     translate_box_show_language.value = "zh-CN";
     translate_box_change.value = "翻译";
-    translate_box_change.setAttribute('style',"width: 250px;height: 50px;outline: none;border: 2px solid black;border-radius: 10px;background-color: transparent;font-size: 16px;cursor: pointer;margin: 10px;");
+    translate_box_change.setAttribute('style',"width: 250px;height: 50px;outline: none;border: 2px solid black;border-radius: 10px;background-color: white;font-size: 16px;cursor: pointer;margin: 10px;");
     translate_box_input_language.setAttribute('style',"color: #333;font-family: 'Microsoft YaHei', Tahoma, Verdana, SimSun;padding: 4px;font-size: 15px;outline-width: medium;outline-style: none;outline-color: invert;border-radius: 3px;text-shadow: 0px 1px 2px #fff;background-attachment: scroll;background-repeat: repeat-x;background-position-x: left;background-position-y: top;background-size: auto;background-origin: padding-box;background-clip: border-box;background-color: rgb(255, 255, 255);border: solid 1px #ccc;margin: 5px;");
     translate_box_show_language.setAttribute('style',"color: #333;font-family: 'Microsoft YaHei', Tahoma, Verdana, SimSun;padding: 4px;font-size: 15px;outline-width: medium;outline-style: none;outline-color: invert;border-radius: 3px;text-shadow: 0px 1px 2px #fff;background-attachment: scroll;background-repeat: repeat-x;background-position-x: left;background-position-y: top;background-size: auto;background-origin: padding-box;background-clip: border-box;background-color: rgb(255, 255, 255);border: solid 1px #ccc;margin: 5px;");
     translate_box.appendChild(translate_box_input);
@@ -52,7 +52,15 @@
     setTimeout(() => {
         if (image_test.width == 0) {
             translate_body.style.backgroundImage =
-                "url(https://raw.githubusercontent.com/datehoer/translate_tampermonkey/main/translate.png)";
+                "url('https://raw.githubusercontent.com/datehoer/translate_tampermonkey/main/translate.png')";
+        }
+    }, 1000)
+    image_test = new Image();
+    image_test.src = 'https://raw.githubusercontent.com/datehoer/translate_tampermonkey/main/translate.png';
+    setTimeout(() => {
+        if (image_test.width == 0) {
+            translate_body.style.backgroundColor =
+                "aqua";
         }
     }, 1000)
     $('.translate_box').hide()
@@ -102,6 +110,6 @@
             document.onmousemove = null;
             this.style.cursor = "default";
         };
-    };
+    }
     dragFunc("translate_box");
 })();
