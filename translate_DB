@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Translate_DB
 // @namespace    https://zjzdmc.top
-// @version      0.6.2
+// @version      0.6.3
 // @description  一个非常呆的翻译插件,点击百度翻译图标,输入内容,选择语言,翻译/需要开启跨域请求,请点击始终允许.
 // @author       Datehoer
 // @match        *://*/*
@@ -51,15 +51,13 @@
     image_test.src = 'https://zjzdmc.top/img/translate.png';
     setTimeout(() => {
         if (image_test.width == 0) {
-            translate_body.style.backgroundImage =
-                "url(https://raw.githubusercontent.com/datehoer/translate_tampermonkey/main/translate.png)";
+            translate_body.style.backgroundImage = "url(https://raw.githubusercontent.com/datehoer/translate_tampermonkey/main/translate.png)";
         }
     }, 1000)
     image_test.src = 'https://raw.githubusercontent.com/datehoer/translate_tampermonkey/main/translate.png';
     setTimeout(() => {
         if (image_test.width == 0) {
-            translate_body.style.backgroundColor =
-                "aqua";
+            translate_body.style.backgroundColor = "aqua";
         }
     }, 2000)
     $('.translate_box').hide()
