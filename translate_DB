@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Translate_DB
 // @namespace    https://zjzdmc.top
-// @version      0.5
+// @version      0.6
 // @description  一个非常呆的翻译插件,点击百度翻译图标,输入内容,选择语言,翻译/需要开启跨域请求,请点击始终允许.
 // @author       Datehoer
 // @match        *://*/*
@@ -20,6 +20,7 @@
     translate_body.title = "点击翻译";
     let translate_box = document.createElement("div");
     translate_box.className = "translate_box";
+    translate_box.id = "translate_box";
     translate_box.setAttribute('style',"position:fixed;z-index:99999;top:100px;right:100px;width:400px;text-align: center;font-family: 'Arial','Microsoft YaHei','黑体','宋体',sans-serif;background-image:linear-gradient(-90deg, #29bdd9 0%, #276ace 100%);padding: 10px");
     let translate_box_input = document.createElement("textarea");
     let translate_box_change = document.createElement("input");
@@ -82,4 +83,25 @@
             }
         })
     })
+    // 拖拽
+    function dragFunc(id) {
+        var Drag = document.getElementById(id);
+        Drag.onmousedown = function(event) {
+            var ev = event || window.event;
+            event.stopPropagation();
+            var disX = ev.clientX - Drag.offsetLeft;
+            var disY = ev.clientY - Drag.offsetTop;
+            document.onmousemove = function(event) {
+                var ev = event || window.event;
+                Drag.style.left = ev.clientX - disX + "px";
+                Drag.style.top = ev.clientY - disY + "px";
+                Drag.style.cursor = "move";
+            };
+        };
+        Drag.onmouseup = function() {
+            document.onmousemove = null;
+            this.style.cursor = "default";
+        };
+    };
+    dragFunc("translate_box");
 })();
