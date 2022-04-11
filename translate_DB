@@ -47,6 +47,10 @@
     translate_box.appendChild(translate_box_show);
     body.appendChild(translate_box);
     body.appendChild(translate_body);
+    // 放弃GitHub了,各种问题
+    if(location.origin == 'https://github.com'){
+        translate_body.style.backgroundColor = "aqua";
+    }
     let image_test = new Image();
     image_test.src = 'https://zjzdmc.top/img/translate.png';
     setTimeout(() => {
