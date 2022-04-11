@@ -16,7 +16,7 @@
     console.log("hello world");
     let translate_body = document.createElement("div");
     translate_body.className = "translate_body";
-    translate_body.setAttribute("style","background-image:url('https://zjzdmc.top/img/translate.png');background-repeat:no-repeat;background-size:100%;position:fixed;top:50px;right:50px;width:35px;height:35px;overflow:hidden;z-index:9999;cursor:pointer;");
+    translate_body.setAttribute("style","background-image:url(https://zjzdmc.top/img/translate.png);background-repeat:no-repeat;background-size:100%;position:fixed;top:50px;right:50px;width:35px;height:35px;overflow:hidden;z-index:9999;cursor:pointer;");
     translate_body.title = "点击翻译";
     let translate_box = document.createElement("div");
     translate_box.className = "translate_box";
@@ -52,7 +52,7 @@
     setTimeout(() => {
         if (image_test.width == 0) {
             translate_body.style.backgroundImage =
-                "url('https://raw.githubusercontent.com/datehoer/translate_tampermonkey/main/translate.png')";
+                "url(https://raw.githubusercontent.com/datehoer/translate_tampermonkey/main/translate.png)";
         }
     }, 1000)
     image_test = new Image();
