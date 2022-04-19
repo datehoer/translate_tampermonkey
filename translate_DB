@@ -1,7 +1,7 @@
-// ==UserScript==
+ // ==UserScript==
 // @name         Translate_DB
 // @namespace    https://zjzdmc.top
-// @version      0.6.7
+// @version      0.6.8
 // @description  一个非常呆的翻译插件,点击百度翻译图标,输入内容,选择语言,翻译/需要开启跨域请求,请点击始终允许.
 // @author       Datehoer
 // @match        *://*/*
@@ -83,6 +83,8 @@
     })
     translate_body.addEventListener("click", () => {
         $('.translate_box').toggle();
+        $('.translate_box').css("top", parseInt($('#translate_body').css('top'))+50+"px");
+        $('.translate_box').css("left", parseInt($('#translate_body').css('left'))-450+"px");
     })
     translate_box_close.addEventListener("click", ()=>{
         $('.translate_box').hide()
